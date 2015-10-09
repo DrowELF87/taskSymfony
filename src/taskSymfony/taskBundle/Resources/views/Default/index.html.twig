@@ -1,0 +1,58 @@
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+{% javascripts '@taskSymfonytaskBundle/Resources/js/*' %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% stylesheets '@taskSymfonytaskBundle/Resources/css/*' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+<title>
+Перечень продуктов.
+</title>
+<body>
+<script type="text/javascript">
+$('document').ready(function(){
+    $('#addProduct').click(function(){
+        $('#modal').modal();
+    });
+    $('.del').click(function(){
+       return confirm('Are you sure you want to delete this product?');
+    });
+    $('.upd').click(function(){
+        alert('zxc');
+    });
+});
+</script>
+{% if products is empty %}
+    Перечень продуктов пуст.
+{% else %}
+    Продукты:
+    {% for product in products %}
+        <div style="border: 1px solid #000;">
+            <span style="border: 1px solid #f00;">{{ product.title|e }}</span>
+            <span style="border: 1px solid #f00;">{{ product.description|e }}</span>
+            <span style="border: 1px solid #f00;"><img src="../../images/{{ product.photo }}" width="100px;"/></span>
+            <a class="del" href="remove/{{ product.id }}" style="width: 30px; color: #000; margin-left: 20px;">X</a>
+            <a class="upd" href="#" style="margin-left: 50px;"><img src="../../images/pencil.png" title="Редактировать"/></a>
+        </div>
+    {% endfor %}
+{% endif %}
+<div>
+<input id="addProduct" type="button" value="Добавить" data-toggle="modal"/>
+</div>
+{{ form_start(form) }}
+    <div id="modal" class="modal hide">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h2>Добавление продукта</h2>
+        </div>
+        <div class="modal-body">
+            <p>Укажите следующие обязательные поля для продукта:</p>
+            <div>
+                {{ form_widget(form) }}
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}
+</body>
+</html>

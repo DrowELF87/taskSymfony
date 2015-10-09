@@ -1,0 +1,13 @@
+demos_blog:
+    resource: "@DemosBlogBundle/Controller/"
+    type:     annotation
+    prefix:   /blog
+
+task_symfonytask:
+    resource: "@taskSymfonytaskBundle/Controller/"
+    type:     annotation
+    prefix:   /product
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
